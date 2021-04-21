@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "FilePicker",
     platforms: [
-        .macOS(.v10_15),
+        .macOS(.v11),
         .iOS(.v14)
     ],
     products: [
