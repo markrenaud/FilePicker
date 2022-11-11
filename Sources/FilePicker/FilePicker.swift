@@ -46,8 +46,8 @@ public struct FilePicker<LabelView: View>: View {
         self.labelViewContent = labelViewContent
     }
 
-    public init(types: [UTType], allowMultiple: Bool, title: String, onPicked completionHandler: @escaping PickedURLsCompletionHandler) where LabelView == Text {
-        self.init(types: types, allowMultiple: allowMultiple, onPicked: completionHandler) { Text(title) }
+    public init(types: [UTType], allowMultiple: Bool, title: String, asCopy: Bool = true, onPicked completionHandler: @escaping PickedURLsCompletionHandler) where LabelView == Text {
+        self.init(types: types, allowMultiple: allowMultiple, asCopy: asCopy, onPicked: completionHandler) { Text(title) }
     }
     
     #if os(iOS)
