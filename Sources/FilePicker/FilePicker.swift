@@ -34,18 +34,20 @@ public struct FilePicker<LabelView: View>: View {
     
     public let types: [UTType]
     public let allowMultiple: Bool
+    public let asCopy: Bool
     public let pickedCompletionHandler: PickedURLsCompletionHandler
     public let labelViewContent: LabelViewContent
     
-    public init(types: [UTType], allowMultiple: Bool, onPicked completionHandler: @escaping PickedURLsCompletionHandler, @ViewBuilder label labelViewContent: @escaping LabelViewContent) {
+    public init(types: [UTType], allowMultiple: Bool, asCopy: Bool = true, onPicked completionHandler: @escaping PickedURLsCompletionHandler, @ViewBuilder label labelViewContent: @escaping LabelViewContent) {
         self.types = types
         self.allowMultiple = allowMultiple
+        self.asCopy = asCopy
         self.pickedCompletionHandler = completionHandler
         self.labelViewContent = labelViewContent
     }
 
-    public init(types: [UTType], allowMultiple: Bool, title: String, onPicked completionHandler: @escaping PickedURLsCompletionHandler) where LabelView == Text {
-        self.init(types: types, allowMultiple: allowMultiple, onPicked: completionHandler) { Text(title) }
+    public init(types: [UTType], allowMultiple: Bool, title: String, asCopy: Bool = true, onPicked completionHandler: @escaping PickedURLsCompletionHandler) where LabelView == Text {
+        self.init(types: types, allowMultiple: allowMultiple, asCopy: asCopy, onPicked: completionHandler) { Text(title) }
     }
     
     #if os(iOS)
@@ -61,7 +63,7 @@ public struct FilePicker<LabelView: View>: View {
         )
         .disabled(isPresented)
         .sheet(isPresented: $isPresented) {
-            FilePickerUIRepresentable(types: types, allowMultiple: allowMultiple, onPicked: pickedCompletionHandler)
+            FilePickerUIRepresentable(types: types, allowMultiple: allowMultiple, asCopy: asCopy, onPicked: pickedCompletionHandler)
         }
     }
     

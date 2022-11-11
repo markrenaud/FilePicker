@@ -35,11 +35,13 @@ public struct FilePickerUIRepresentable: UIViewControllerRepresentable {
     
     public let types: [UTType]
     public let allowMultiple: Bool
+    public let asCopy: Bool
     public let pickedCompletionHandler: PickedURLsCompletionHandler
     
-    public init(types: [UTType], allowMultiple: Bool, onPicked completionHandler: @escaping PickedURLsCompletionHandler) {
+    public init(types: [UTType], allowMultiple: Bool, asCopy: Bool, onPicked completionHandler: @escaping PickedURLsCompletionHandler) {
         self.types = types
         self.allowMultiple = allowMultiple
+        self.asCopy = asCopy
         self.pickedCompletionHandler = completionHandler
     }
     
@@ -48,7 +50,7 @@ public struct FilePickerUIRepresentable: UIViewControllerRepresentable {
     }
     
     public func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: types, asCopy: true)
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: types, asCopy: asCopy)
         picker.delegate = context.coordinator
         picker.allowsMultipleSelection = allowMultiple
         return picker
