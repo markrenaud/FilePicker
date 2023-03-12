@@ -62,6 +62,7 @@ public struct FilePicker<LabelView: View>: View {
         .disabled(isPresented)
         .sheet(isPresented: $isPresented) {
             FilePickerUIRepresentable(types: types, allowMultiple: allowMultiple, onPicked: pickedCompletionHandler)
+                .edgesIgnoringSafeArea(.bottom)
         }
     }
     
